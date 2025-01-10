@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>{{ isCreateMode ? 'Create Entry' : 'Edit Entry' }}</h2>
+<mat-dialog-content>
+  <form class="form-group"[formGroup]="formGroup">
+    <div class="form-wrapper" *ngFor="let field of formFields">
+      <div *ngIf="field.type === 'date'">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>{{ field.label }}</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="{{ field.name }}" />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-error *ngIf="formGroup.get(field.name)?.hasError('required')">
+          {{ field.label }} is required.
+        </mat-error>
+      </div>
+      <div *ngIf="field.type === 'select'">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>{{ field.label }}</mat-label>
+          <mat-select [formControlName]="field.name" [multiple]="field.multi">
+            <mat-option *ngFor="let option of field.options" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>      
+      <div *ngIf="field.type !== 'select' && field.type !== 'date'">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>{{ field.label }}</mat-label>
+          <input
+          matInput
+          [formControlName]="field.name"
+          [type]="field.type"
+          [placeholder]="field.label"
+          (input)="onInputChange($event, field)"
+        />
+          <mat-error *ngIf="formGroup.get(field.name)?.hasError('required')">
+            {{ field.label }} is required.
+          </mat-error>
+          <mat-error *ngIf="formGroup.get(field.name)?.hasError('min')">
+            Minimum value for {{ field.label }} is 1.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="red" (click)="cancel()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="save()"
+    [disabled]="!formGroup.valid"
+  >
+    Save
+  </button>
+</mat-dialog-actions>

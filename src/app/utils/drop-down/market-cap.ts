@@ -1,0 +1,3 @@
+export const marketCapValues = ['Afghani', 'Ariary', 'Baht', 'Balboa', 'Birr', 'Bolivar', 'Boliviano', 'Cedi', 'Colon', 'Denar', 'Dinar', 'Dollar', 'Dong', 'Dram', 'Euro', 'Forint', 'Franc', 'Guarani', 'Hryvnia', 'Kip', 'Koruna', 'Krona', 'Krone', 'Kuna', 'Kwanza', 'Lari', 'Lek', 'Lempira', 'Leone', 'Leu', 'Lev', 'Lilangeni', 'Lira',
+    'Litas', 'Loti', 'Manat', 'Marka', 'Metical', 'Naira', 'Peso', 'Pound', 'Pula', 'Quetzal', 'Rand', 'Real', 'Rial', 'Riels', 'Ringgit', 'Ruble', 'Rufiyaa', 'Rupee', 'Rupiah', 'Shekel', 'Shilling', 'Sol', 'Som', 'Somoni', 'Taka', 'Tala', 'Tenge', 'Tugrik', 'Won', 'Yen', 'Yuan Renminbi', 'Zloty'];
+ 

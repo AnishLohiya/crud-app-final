@@ -1,0 +1,18 @@
+-- Learnings
+
+- Generic Use for Ag Grid and Form
+- Less Repitition of Code
+- More Reusability
+
+
+-- Challenges
+
+- Populating Data on Form (Not figured out the best way to do it)
+- Unable to implement signal for form due to generic use of form
+
+
+-- Critical Issues
+
+- Performance of ag-grid-enterprise is not good (Lighthouse score).
+- Too much code inform of css and js
+

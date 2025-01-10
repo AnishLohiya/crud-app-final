@@ -1,0 +1,10 @@
+For Anuglar App
+npm start
+
+For Json Server
+npm install -g json-server
+
+json-server --watch mock.json
+json-server --watch presets.json --port 8000
+json-server --watch main.json --port 3001
+json-server --watch db.json --port 8801

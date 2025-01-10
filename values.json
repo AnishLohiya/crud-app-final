@@ -1,0 +1,199 @@
+{
+    "values": [
+        {
+            "name": "Afghani"
+        },
+        {
+            "name": "Ariary"
+        },
+        {
+            "name": "Baht"
+        },
+        {
+            "name": "Balboa"
+        },
+        {
+            "name": "Birr"
+        },
+        {
+            "name": "Bolivar"
+        },
+        {
+            "name": "Boliviano"
+        },
+        {
+            "name": "Cedi"
+        },
+        {
+            "name": "Colon"
+        },
+        {
+            "name": "Denar"
+        },
+        {
+            "name": "Dinar"
+        },
+        {
+            "name": "Dollar"
+        },
+        {
+            "name": "Dong"
+        },
+        {
+            "name": "Dram"
+        },
+        {
+            "name": "Euro"
+        },
+        {
+            "name": "Forint"
+        },
+        {
+            "name": "Franc"
+        },
+        {
+            "name": "Guarani"
+        },
+        {
+            "name": "Hryvnia"
+        },
+        {
+            "name": "Kip"
+        },
+        {
+            "name": "Koruna"
+        },
+        {
+            "name": "Krona"
+        },
+        {
+            "name": "Krone"
+        },
+        {
+            "name": "Kuna"
+        },
+        {
+            "name": "Kwanza"
+        },
+        {
+            "name": "Lari"
+        },
+        {
+            "name": "Lek"
+        },
+        {
+            "name": "Lempira"
+        },
+        {
+            "name": "Leone"
+        },
+        {
+            "name": "Leu"
+        },
+        {
+            "name": "Lev"
+        },
+        {
+            "name": "Lilangeni"
+        },
+        {
+            "name": "Lira"
+        },
+        {
+            "name": "Litas"
+        },
+        {
+            "name": "Loti"
+        },
+        {
+            "name": "Manat"
+        },
+        {
+            "name": "Marka"
+        },
+        {
+            "name": "Metical"
+        },
+        {
+            "name": "Naira"
+        },
+        {
+            "name": "Peso"
+        },
+        {
+            "name": "Pound"
+        },
+        {
+            "name": "Pula"
+        },
+        {
+            "name": "Quetzal"
+        },
+        {
+            "name": "Rand"
+        },
+        {
+            "name": "Real"
+        },
+        {
+            "name": "Rial"
+        },
+        {
+            "name": "Riels"
+        },
+        {
+            "name": "Ringgit"
+        },
+        {
+            "name": "Ruble"
+        },
+        {
+            "name": "Rufiyaa"
+        },
+        {
+            "name": "Rupee"
+        },
+        {
+            "name": "Rupiah"
+        },
+        {
+            "name": "Shekel"
+        },
+        {
+            "name": "Shilling"
+        },
+        {
+            "name": "Sol"
+        },
+        {
+            "name": "Som"
+        },
+        {
+            "name": "Somoni"
+        },
+        {
+            "name": "Taka"
+        },
+        {
+            "name": "Tala"
+        },
+        {
+            "name": "Tenge"
+        },
+        {
+            "name": "Tugrik"
+        },
+        {
+            "name": "Won"
+        },
+        {
+            "name": "Yen"
+        },
+        {
+            "name": "Yuan Renminbi"
+        },
+        {
+            "name": "Zloty"
+        }
+    ]
+}

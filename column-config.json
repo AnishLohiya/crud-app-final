@@ -1,0 +1,80 @@
+{
+    "field": "cqValuationFirmAssignment",
+    "headerName": "CQ Valuation Firm Assignment",
+    "width": 260,
+    "hide": false,
+    "suppressColumnsToolPanel": true,
+    "allowEditing": true,
+    "isPrimaryKey": false,
+    "editType": "dropdownedit",
+    "type": "string",
+    "format": null,
+    "columnOrder": null,
+    "isDropdownEdit": null,
+    "sortOrder": null,
+    "minWidth": 100,
+    "maxWidth": null,
+    "textAlign": "Left",
+    "fieldType": "string",
+    "fieldRequired": true,
+    "showInAdd": true,
+    "showInEdit": true,
+    "headerTextAlign": "Left",
+    "customSetting": {
+        "source": null,
+        "dropDownValues": [
+            {
+                "cqValuationFirmAssignment": "CBH"
+            },
+            {
+                "cqValuationFirmAssignment": "Cost"
+            },
+            {
+                "cqValuationFirmAssignment": "DT"
+            },
+            {
+                "cqValuationFirmAssignment": "HL"
+            },
+            {
+                "cqValuationFirmAssignment": "Internal"
+            },
+            {
+                "cqValuationFirmAssignment": "Lincoln"
+            },
+            {
+                "cqValuationFirmAssignment": "MarkIt"
+            },
+            {
+                "cqValuationFirmAssignment": "NAV"
+            },
+            {
+                "cqValuationFirmAssignment": "TBD"
+            },
+            {
+                "cqValuationFirmAssignment": "Trading Desk"
+            },
+            {
+                "cqValuationFirmAssignment": "N/A"
+            },
+            {
+                "cqValuationFirmAssignment": "BrokerQuotes"
+            },
+            {
+                "cqValuationFirmAssignment": "Situs"
+            }
+        ],
+        "isCustomAttribute": false,
+        "isSource": false,
+        "sourceId": 0,
+        "fieldId": null
+    },
+    "createdBy": null,
+    "whenCreated": null,
+    "lastModifiedBy": "Service Account",
+    "lastModifiedOn": "2024-03-05T11:42:07.38",
+    "displayAsCheckBox": false,
+    "allowSorting": null,
+    "addInForm": false,
+    "editInForm": false,
+    "isFrozen": null
+}

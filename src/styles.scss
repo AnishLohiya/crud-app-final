@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+/* Core Data Grid CSS */
+@use "@angular/material" as mat;
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-quartz.css";
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// .cdk-overlay-container {
+//   z-index: 1000 !important;
+// }
+
+.greenBackground {
+  background-color: #33cc3344;
+}
+
+.redFont {
+  color: #bb0000;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+.darkGreyBackground {
+  background-color: #99999944;
+}
+
+.notInExcel {
+  color: #1b6d85;
+}

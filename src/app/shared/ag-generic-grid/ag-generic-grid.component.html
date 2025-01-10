@@ -1,0 +1,23 @@
+
+<ag-grid-angular
+      style="height: 800px; 
+
+      @media screen and (max-height: 600px) {
+        height: 200px;
+      }"
+      class="ag-theme-quartz"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      [pagination]="pagination"
+      [paginationPageSize]="paginationPageSize"
+      [paginationPageSizeSelector]="paginationPageSizeSelector"
+      (gridReady)="onGridReady($event)"
+      (cellValueChanged)="onCellValueChanged($event)"
+/>
+<button
+  (click)="onBtExport()"
+  style="font-weight: bold; margin-top: 10px; margin-bottom: 10px;"
+>
+  Export to CSV
+</button>

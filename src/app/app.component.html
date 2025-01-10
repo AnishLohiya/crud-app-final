@@ -1,0 +1,58 @@
+<mat-tab-group>
+  <mat-tab label="Data Tabs">
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      <a
+        mat-tab-link
+        routerLink="/data-tabs/products"
+        routerLinkActive="active-link"
+        >Products</a
+      >
+      <a
+        mat-tab-link
+        routerLink="/data-tabs/data"
+        routerLinkActive="active-link"
+        >Olympic Data</a
+      >
+      <a
+        mat-tab-link
+        routerLink="/data-tabs/equities"
+        routerLinkActive="active-link"
+        >Equities Data</a
+      >
+      <a
+        mat-tab-link
+        routerLink="/data-tabs/custom"
+        routerLinkActive="active-link"
+        >Custom Data</a
+      >
+    </nav>
+  </mat-tab>
+  <mat-tab label="Custom Tabs">
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      <a
+        mat-tab-link
+        routerLink="/custom-tabs/products"
+        routerLinkActive="active-link"
+        >Products</a
+      >
+      <a
+        mat-tab-link
+        routerLink="/custom-tabs/data"
+        routerLinkActive="active-link"
+        >Olympic Data</a
+      >
+      <a
+        mat-tab-link
+        routerLink="/custom-tabs/equities"
+        routerLinkActive="active-link"
+        >Equities Data</a
+      >
+    </nav>
+  </mat-tab>
+</mat-tab-group>
+
+<div #tabPanel>
+  <router-outlet></router-outlet>
+</div>
+
+<!-- <app-task-group></app-task-group> -->

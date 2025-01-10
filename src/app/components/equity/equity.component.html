@@ -1,0 +1,62 @@
+<div class="toolbar">
+  <div>
+    <button mat-raised-button color="primary" (click)="openCreateModal()">Add Equity</button>
+    <button mat-raised-button color="primary" (click)="showColumnChooser()">Column Chooser</button>
+  </div>
+  <div>
+    <div class="button-group">
+      <button (click)="saveFilterModel()">Save Preset</button>
+      <button (click)="clearFilters()">Reset Preset</button>
+    </div>
+    <div>
+      <label for="savedFiltersSelect">Apply Saved Preset:</label>
+      <select id="savedFiltersSelect" (change)="applySavedFilter($event)">
+        <option value="empty">Select a filter</option>
+        <option *ngFor="let filter of filtersList" [value]="filter.name">
+          {{ filter.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="export-controls">
+    <div class="export-item" (click)="onCsvExport()">
+      <mat-icon 
+        aria-hidden="false" 
+        aria-label="CSV download icon" 
+        fontIcon="download"
+      ></mat-icon>
+      <p>CSV</p>
+    </div>
+    <div class="export-item" (click)="onExcelExport()">
+      <mat-icon 
+        aria-hidden="false" 
+        aria-label="Excel download icon" 
+        fontIcon="download"
+      ></mat-icon>
+      <p>Excel</p>
+    </div>
+  </div>  
+  <mat-form-field>
+    <mat-label>Column Search</mat-label>
+    <input matInput type="search" placeholder="Search By Column" [matAutocomplete]="auto"
+      (input)="onSearchColumn($event)" />
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onColumnSelected($event)">
+      <mat-option *ngFor="let column of filteredList" [value]="column.colId">
+        {{ column.colId }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+
+<div class="example-wrapper">
+
+  <ag-grid-angular style="height: 800px; 
+    @media screen and (max-height: 600px) {
+      height: 200px;
+    }" class="ag-theme-quartz" [rowData]="equities" [gridOptions]="gridOptions" [columnDefs]="colDefs"
+    [defaultColDef]="defaultColDef" [pagination]="pagination" [paginationPageSize]="paginationPageSize"
+    [paginationPageSizeSelector]="paginationPageSizeSelector" 
+    [sideBar]="sideBar"
+    [excelStyles]="excelStyles"
+    (gridReady)="onGridReady($event)" />
+</div>

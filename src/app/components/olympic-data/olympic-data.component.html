@@ -1,0 +1,36 @@
+<div>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openCreateModal()"
+  >
+    Add Record
+  </button>
+</div>
+<ag-grid-angular style="height: 800px; 
+    @media screen and (max-height: 600px) {
+      height: 200px;
+    }" class="ag-theme-quartz" [rowData]="olympicData" [gridOptions]="gridOptions" [columnDefs]="colDefs"
+    [defaultColDef]="defaultColDef" [pagination]="pagination" [paginationPageSize]="paginationPageSize"
+    [paginationPageSizeSelector]="paginationPageSizeSelector" 
+    [excelStyles]="excelStyles"
+    (gridReady)="onGridReady($event)"
+    />
+    <div class="export-controls">
+      <div class="export-item" (click)="onCsvExport()">
+        <mat-icon 
+          aria-hidden="false" 
+          aria-label="CSV download icon" 
+          fontIcon="download"
+        ></mat-icon>
+        <p>CSV</p>
+      </div>
+      <div class="export-item" (click)="onExcelExport()">
+        <mat-icon 
+          aria-hidden="false" 
+          aria-label="Excel download icon" 
+          fontIcon="download"
+        ></mat-icon>
+        <p>Excel</p>
+      </div>
+    </div>  
