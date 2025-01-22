@@ -28,7 +28,6 @@
             "addInForm": false,
             "editInForm": false,
             "pinned": "left",
-            "filter": "filter",
             "values": null
         },
         {
@@ -59,7 +58,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": "left",
-            "filter": "filter",
             "values": null
         },
         {
@@ -90,7 +88,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": "left",
-            "filter": "filter",
             "values": null
         },
         {
@@ -122,7 +119,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": null
         },
         {
@@ -153,7 +149,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": null
         },
         {
@@ -184,7 +179,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": null
         },
         {
@@ -215,7 +209,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": null
         },
         {
@@ -341,7 +334,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": [
                 "Afghani",
                 "Ariary",
@@ -438,7 +430,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": null
         },
         {
@@ -469,7 +460,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": null
         },
         {
@@ -500,7 +490,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": null
         },
         {
@@ -531,7 +520,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": null
         },
         {
@@ -562,7 +550,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": null
         },
         {
@@ -593,7 +580,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": null
         },
         {
@@ -624,7 +610,6 @@
             "addInForm": true,
             "editInForm": true,
             "pinned": null,
-            "filter": null,
             "values": null
         },
         {
@@ -652,7 +637,6 @@
             "addInForm": false,
             "editInForm": false,
             "pinned": null,
-            "filter": null,
             "values": null
         }
     ]

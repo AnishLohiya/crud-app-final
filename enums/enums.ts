@@ -4,11 +4,11 @@ export enum ColType {
   ActionCell = 'ActionCell',
   TextCell = 'TextCell',
   NumberCell = 'NumberCell',
-    DateCell = 'DateCell',
+  DateCell = 'DateCell',
 }
 
-export enum EditType {
-  DropdownEdit = 'dropdownedit',
-  DateEdit = 'dateedit',
-  TextEdit = 'textedit',
-}
+// export enum EditType {
+//   DropdownEdit = 'dropdownedit',
+//   DateEdit = 'dateedit',
+//   TextEdit = 'textedit',
+// }

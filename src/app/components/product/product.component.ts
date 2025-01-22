@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GridOptions, GridApi, GridReadyEvent } from 'ag-grid-community';
-import 'ag-grid-enterprise';
+// import 'ag-grid-enterprise';
 import OdataProvider from 'ag-grid-odata';
 import { AgGridAngular } from 'ag-grid-angular';
 import { NgFor } from '@angular/common';

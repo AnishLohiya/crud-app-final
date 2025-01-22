@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-
 import type { IToolPanelAngularComp } from 'ag-grid-angular';
 import type { IToolPanelParams } from 'ag-grid-community';
-import { equityFormFields } from '../../utils/equityFormFields';
-import { FormModalComponent } from '../../shared/form-modal/form-modal.component';
+import { equityFormFields } from '../../utils/form-fields/equityFormFields';
 import { MatDialog } from '@angular/material/dialog';
 import { EquityComponent } from './equity.component';
-import { AgGenericGridComponent } from '../../shared/ag-generic-grid/ag-generic-grid.component';
 
 export interface CustomStatsToolPanelParams extends IToolPanelParams {
     title: string;

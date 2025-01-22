@@ -1,13 +1,9 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatChip, MatChipSet, MatChipsModule } from '@angular/material/chips';
-
 import type { ICellRendererAngularComp } from 'ag-grid-angular';
 import type { ICellRendererParams } from 'ag-grid-community';
 
-// simple cell renderer returns dummy buttons. in a real application, a component would probably
-// be used with operations tied to the buttons. in this example, the cell renderer is just for
-// display purposes.
 @Component({
     standalone: true,
     imports: [NgFor, NgClass, MatChipSet, MatChip, MatChipsModule],

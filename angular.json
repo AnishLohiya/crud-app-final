@@ -33,11 +33,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/app/components/olympic-data/olympic-data.component.scss",
-              "src/app/components/equity/equity.component.scss",
-              "src/app/components/custom/custom.component.scss",
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
-            ],
+              ],
             "scripts": []
           },
           "configurations": {

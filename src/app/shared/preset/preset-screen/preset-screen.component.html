@@ -1,0 +1,64 @@
+<div
+  class="flex w-full justify-between items-center p-6 bg-gray-100 border-b border-gray-300"
+>
+  <h2 class="text-4xl font-bold text-gray-800 ml-96">Presets</h2>
+  <button
+    class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-150 ease-in-out"
+    (click)="close()"
+  >
+    Close
+  </button>
+</div>
+
+<div class="p-6">
+  <table class="w-full bg-white border border-gray-300 rounded-lg shadow-md">
+    <thead>
+      <tr class="bg-gray-200 text-center">
+        <th
+          class="py-3 px-6 border border-gray-300 text-gray-600 font-bold "
+        >
+          ID
+        </th>
+        <th
+          class="py-3 px-6 border border-gray-300 text-gray-600 font-bold"
+        >
+          Name
+        </th>
+        <th
+          class="py-3 px-6 border border-gray-300 text-gray-600 font-bold"
+        >
+          Username
+        </th>
+        <th
+          class="py-3 px-6 border border-gray-300 text-gray-600 font-bold"
+        >
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let element of data.presets; let i = index"
+        class="hover:bg-gray-100 text-center"
+      >
+        <td class="py-4 px-6 border border-gray-300 font-semibold">
+            {{ i + 1 }}
+        </td>
+        <td class="py-4 px-6 border border-gray-300 font-semibold">
+          {{ element.name }}
+        </td>
+        <td class="py-4 px-6 border border-gray-300 font-semibold">
+          {{ element.username }}
+        </td>
+        <td class="py-4 px-6 border border-gray-300">
+          <button
+            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-150 ease-in-out"
+            (click)="applyPreset(element)"
+          >
+            Apply
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

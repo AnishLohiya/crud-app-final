@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ICellEditorAngularComp } from 'ag-grid-angular';
 import { ODataDataSource } from 'odata-data-source';
-import { TextFilter } from './text-filter';
+import { TextFilter } from '../../../utils/odata-filters/text-filter';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({

@@ -1,0 +1,31 @@
+<div class="p-6 bg-white rounded-lg shadow-lg transition-shadow hover:shadow-xl">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Enter Filter Name</h2>
+  <div class="mb-6">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Filter Name</mat-label>
+      <input 
+        matInput 
+        id="filterName" 
+        type="text" 
+        [(ngModel)]="filterName"
+        placeholder="Enter filter name"
+      />
+    </mat-form-field>
+  </div>  
+  <div class="flex justify-end gap-4">
+    <button 
+      type="button" 
+      class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-150 ease-in-out"
+      (click)="onCancel()"
+    >
+      Cancel
+    </button>
+    <button 
+      type="button" 
+      class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-150 ease-in-out"
+      (click)="onSave()"
+    >
+      Save
+    </button>
+  </div>
+</div>

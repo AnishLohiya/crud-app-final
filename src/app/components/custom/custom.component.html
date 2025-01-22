@@ -1,26 +1,19 @@
-<div class="toolbar">
+<!-- <div class="toolbar">
   <div>
     <button mat-raised-button color="primary" (click)="openCreateModal()">
       Add Equity
     </button>
-    <button mat-raised-button color="primary" (click)="showColumnChooser()">
-      Column Chooser
-    </button>
   </div>
   <div>
-    <div class="button-group">
-      <button (click)="saveFilterModel()">Save Preset</button>
-      <button (click)="clearFilters()">Reset Preset</button>
-    </div>
-    <div>
-      <label for="savedFiltersSelect">Apply Saved Preset:</label>
-      <select id="savedFiltersSelect" (change)="applySavedFilter($event)">
-        <option value="empty">Select a filter</option>
-        <option *ngFor="let filter of filtersList" [value]="filter.name">
-          {{ filter.name }}
-        </option>
-      </select>
-    </div>
+    <app-preset
+      [apiUrl]="'http://localhost:8000/presets'"
+      [getFilterModel]="getFilterModel.bind(this)"
+      [getColumnState]="getColumnState.bind(this)"
+      [setFilterModel]="setFilterModel.bind(this)"
+      [applyColumnState]="applyColumnState.bind(this)"
+      (clearFilters)="clearFilters()"
+      (applyPreset)="onPresetApplied($event)"
+    ></app-preset>
   </div>
   <div class="export-controls">
     <div class="export-item" (click)="onCsvExport()">
@@ -58,7 +51,23 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-</div>
+</div> -->
+<app-navbar
+  [addButtonText]="'Add Equity'"
+  [apiUrl]="'http://localhost:8000/presets'"
+  [getFilterModel]="getFilterModel.bind(this)"
+  [getColumnState]="getColumnState.bind(this)"
+  [setFilterModel]="setFilterModel.bind(this)"
+  [applyColumnState]="applyColumnState.bind(this)"
+  [gridApi]="gridApi"
+  [presetList]="presetList"
+  [filteredList]="filteredList"
+  (clearFilters)="clearFilters()"
+  (applyPreset)="onPresetApplied($event)"
+  (onCsvExport)="onCsvExport()"
+  (onExcelExport)="onExcelExport()"
+  (onAddClick)="openCreateModal()"
+></app-navbar>
 
 <ag-grid-angular
   style="height: 800px"
@@ -73,4 +82,6 @@
   [sideBar]="sideBar"
   [columnTypes]="columnTypes"
   (gridReady)="onGridReady($event)"
+  [allowContextMenuWithControlKey]="true"
+  [getContextMenuItems]="getContextMenuItems"
 />

@@ -11,6 +11,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.highlight-column {
+  background-color: lightgray !important;
+  transition: background-color 1s ease-in-out;
+}
+
 // .cdk-overlay-container {
 //   z-index: 1000 !important;
 // }
@@ -22,7 +27,11 @@ body {
 .redFont {
   color: #bb0000;
   font-style: italic;
-  text-decoration: underline;
+}
+
+.greenFont {
+  color: #33cc33;
+  font-style: italic;
 }
 
 .darkGreyBackground {

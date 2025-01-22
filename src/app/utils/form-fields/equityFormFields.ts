@@ -1,4 +1,4 @@
-import { marketCapValues } from "./drop-down/market-cap";
+import { marketCapValues } from "../drop-down/market-cap";
 
 /*
 export interface IEquity {

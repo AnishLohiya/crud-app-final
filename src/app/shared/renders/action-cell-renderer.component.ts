@@ -6,8 +6,14 @@ import { ICellRenderer } from 'ag-grid-community';
 @Component({
   selector: 'app-action-cell-renderer',
   imports: [MatButtonModule, MatIconModule],
-  templateUrl: './action-cell-renderer.component.html',
-  styleUrl: './action-cell-renderer.component.scss'
+  template: `
+    <button mat-icon-button color="primary" (click)="onEditClick()">
+      <mat-icon aria-hidden="false" aria-label="Edit">edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="onDeleteClick()">
+      <mat-icon aria-hidden="false" aria-label="Delete">delete</mat-icon>
+    </button>
+  `,
 })
 export class ActionCellRendererComponent implements ICellRenderer {
   params: any;
@@ -22,7 +28,7 @@ export class ActionCellRendererComponent implements ICellRenderer {
 
   onEditClick(): void {
     if (this.params.onEdit) {
-      const recordId = this.params.data.id; 
+      const recordId = this.params.data.id;
       this.params.onEdit(recordId);
     }
   }
@@ -33,5 +39,4 @@ export class ActionCellRendererComponent implements ICellRenderer {
       this.params.onDelete(recordId);
     }
   }
-  
 }

@@ -1,97 +1,39 @@
 import { Injectable } from '@angular/core';
 import { ColType } from '../../enums/enums';
-import { ActionCellRendererComponent } from '../../src/app/components/action-cell-renderer/action-cell-renderer.component';
-import { MultiCellRenderer } from '../../src/app/shared/custom-render/multi-cell.renderer.component';
-import { MultiSelectComponent } from '../../src/app/shared/dropdown/multi-select/multi-select.component';
-
+import { ActionItemsColumnFactory, DateColumnFactory, NumberColumnFactory, SingleCellColumnFactory, MultiCellColumnFactory, TextColumnFactory } from '../index'
 @Injectable({
   providedIn: 'root',
 })
 export class ColumnFactory {
+  private factories: { [key in ColType]?: any } = {};
+
+  constructor(
+    private actionItemsFactory: ActionItemsColumnFactory,
+    private dateColumnFactory: DateColumnFactory,
+    private numberColumnFactory: NumberColumnFactory,
+    private singleCellColumnFactory: SingleCellColumnFactory,
+    private multiCellColumnFactory: MultiCellColumnFactory,
+    private textColumnFactory: TextColumnFactory
+  ) {
+    this.factories[ColType.ActionCell] = this.actionItemsFactory;
+    this.factories[ColType.DateCell] = this.dateColumnFactory;
+    this.factories[ColType.NumberCell] = this.numberColumnFactory;
+    this.factories[ColType.SingleCell] = this.singleCellColumnFactory;
+    this.factories[ColType.MultiCell] = this.multiCellColumnFactory; 
+    this.factories[ColType.TextCell] = this.textColumnFactory;
+  }
+
   public createColumns(colDefData: any[]): any[] {
-    const columnDefinitions: any[] = [];
-
-    colDefData.forEach((col) => {
-      const colDef = this.createColumn(col);
-
-      columnDefinitions.push(colDef);
-    });
-    console.log(columnDefinitions);
-    return [...columnDefinitions];
+    return colDefData.map((col) => this.createColumn(col));
   }
 
-  public createColumn(col: any): any {
-    switch (col.ColType) {
-      case ColType.MultiCell:
-        return this.createMultiCellColumn(col);
-      case ColType.SingleCell:
-        return this.createSingleCellColumn(col);
-      case ColType.ActionCell:
-        return this.createActionCellColumn(col);
-      case ColType.TextCell:
-        return this.createTextCellColumn(col);
-      case ColType.NumberCell:
-        return this.createNumberColumn(col);
-      case ColType.DateCell:
-        return this.createDateColumn(col);
-      default:
-        return this.createDefaultColumn(col);
+  public createColumn(col: { ColType: ColType }): any {
+    const factory = this.factories[col.ColType];
+    if (factory && factory.createColumn) {
+      return factory.createColumn(col);
     }
-  }
-
-  private createMultiCellColumn(col: any): any {
-    return {
-      ...col,
-      cellRenderer: MultiCellRenderer,
-      cellEditor: MultiSelectComponent,
-      cellEditorParams: {
-        values: col.values,
-        cellRender: (params: any) => params.value,
-      },
-    };
-  }
-
-  private createSingleCellColumn(col: any): any {
-    return {
-      ...col,
-      cellEditor: 'agRichSelectCellEditor',
-      cellEditorParams: {
-        values: col.values,
-        cellRender: (params: any) => params.value,
-      },
-    };
-  }
-
-  private createActionCellColumn(col: any): any {
-    return {
-      ...col,
-      cellRenderer: ActionCellRendererComponent,
-      cellRendererParams: {
-        onEdit: (id: string) => col.onEdit(id),
-        onDelete: (id: string) => col.onDelete(id),
-      },
-    };
-  }
-
-  private createTextCellColumn(col: any): any {
-    return {
-      ...col,
-      filter: 'agTextCellEditor',
-    };
-  }
-
-  private createNumberColumn(col: any): any {
-    return {
-      ...col,
-      filter: 'agNumberCellEditor',
-    };
-  }
-
-  private createDateColumn(col: any): any {
-    return {
-      ...col,
-      filter: 'agDateCellEditor',
-    };
+    console.warn(`No factory found for column type: ${col.ColType}`);
+    return this.createDefaultColumn(col);
   }
 
   private createDefaultColumn(col: any): any {

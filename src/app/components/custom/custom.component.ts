@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { IEquity } from '../../interfaces/iequity';
 import { EquityService } from '../../services/equity/equity.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {
   ColDef,
+  GetContextMenuItems,
+  GetContextMenuItemsParams,
   GridApi,
   GridOptions,
   GridReadyEvent,
+  MenuItemDef,
   SideBarDef,
   ValueFormatterParams,
   ValueParserParams,
 } from 'ag-grid-community';
 import { FormModalComponent } from '../../shared/form-modal/form-modal.component';
-import { equityFormFields } from '../../utils/equityFormFields';
+import { equityFormFields } from '../../utils/form-fields/equityFormFields';
 import {
   formatDateToDDMMYYYY,
   formatDateToYYYYMMDD,
@@ -22,20 +25,20 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { NgForOf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   MatAutocompleteModule,
-  MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { TestComponent } from '../equity/test.component';
 import { ColumnFactory } from '../../../../factories/ColumnFactory/ColumnFactory';
-import { ActionItemsColumnFactory } from '../../../../factories/ActionItemsColumnFactory/ActionItemsColumnFactory';
-import OdataProvider from 'ag-grid-odata'
+import { ActionItemsColumnFactory } from '../../../../factories/ActionItemsColumnFactory';
+import 'ag-grid-enterprise';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { PopulateDataGridComponent } from '../../shared/populate-data-grid/populate-data-grid.component';
 
 @Component({
-  selector: 'app-equity',
+  selector: 'app-custom',
   imports: [
     MatDialogModule,
     AgGridAngular,
@@ -45,20 +48,21 @@ import OdataProvider from 'ag-grid-odata'
     MatInputModule,
     MatAutocompleteModule,
     MatChipsModule,
-    NgForOf
+    NavbarComponent
   ],
   templateUrl: './custom.component.html',
   styleUrl: './custom.component.scss',
 })
 export class CustomComponent {
   equities: IEquity[] = [];
-  private gridApi!: GridApi<IEquity>;
-  selectedCol: string = '';
-  jsonFilePath: string = 'presets.json';
-  filtersList: {
+  public gridApi!: GridApi<IEquity>;
+  presetList: {
     name: string;
     state: { filterModel: any; columnState: any[] };
   }[] = [];
+  colDefData = [];
+  filteredList: any[] = [];
+
   constructor(
     private equityService: EquityService,
     private dialog: MatDialog,
@@ -88,6 +92,7 @@ export class CustomComponent {
     }
     return value;
   };
+
   valueParser = (params: ValueParserParams) => {
     const { newValue } = params;
     if (newValue == null || newValue === '') {
@@ -130,7 +135,8 @@ export class CustomComponent {
       pinned: 'left',
     },
     suppressPropertyNamesCheck: true,
-    columnTypes: {},
+    columnTypes: this.columnTypes,
+    suppressServerSideFullWidthLoadingRow: true,
   };
 
   pagination: boolean = true;
@@ -140,7 +146,29 @@ export class CustomComponent {
   ngOnInit(): void {
     this.loadEquities();
     this.loadColDefs();
-    this.loadPresets();
+  }
+
+  loadColDefs() {
+    this.http.get('http://localhost:3001/colConfig').subscribe({
+      next: (data: any) => {
+        this.colDefData = data;
+        this.actionsItemsColumnFactory.bindActionHandlers(
+          this.colDefData,
+          this.updateEquity,
+          this.deleteEquity,
+          this
+        );
+        this.createColumnDefs();
+      },
+      error: (err) => {
+        console.error('Error loading column definitions', err);
+      },
+    });
+  }
+
+  createColumnDefs() {
+    console.log('Column Def Data:', this.colDefData);
+    this.colDefs = this.columnFactory.createColumns(this.colDefData);
   }
 
   loadEquities() {
@@ -154,8 +182,34 @@ export class CustomComponent {
     });
   }
 
-  showColumnChooser() {
-    this.gridApi.showColumnChooser();
+  // Preset Functions
+
+  onPresetApplied(presetState: { filterModel: any; columnState: any[] }): void {
+    console.log('Preset Applied:', presetState);
+  }
+
+  public getFilterModel(): any {
+    return this.gridApi.getFilterModel();
+  }
+
+  public getColumnState(): any[] {
+    return this.gridApi.getColumnState();
+  }
+
+  public setFilterModel(filterModel: any): void {
+    this.gridApi.setFilterModel(filterModel);
+  }
+
+  public applyColumnState(columnState: any[]): void {
+    this.gridApi.applyColumnState({
+      state: columnState,
+      applyOrder: true,
+    });
+  }
+
+  clearFilters() {
+    this.gridApi.setFilterModel(null);
+    this.gridApi.resetColumnState();
   }
 
   onCsvExport() {
@@ -201,7 +255,6 @@ export class CustomComponent {
     this.gridApi = params.api;
     this.setColumnDefs();
   }
-
 
   openCreateModal() {
     const dialogRef = this.dialog.open(FormModalComponent, {
@@ -259,7 +312,7 @@ export class CustomComponent {
     });
   }
 
- deleteEquity(id: string) {
+  deleteEquity(id: string) {
     this.equityService.deleteEquity(id).subscribe({
       next: () => {
         this.loadEquities();
@@ -269,7 +322,7 @@ export class CustomComponent {
       },
     });
   }
-  
+
   setColumnDefs() {
     const columnIds = this.gridApi
       .getAllGridColumns()
@@ -277,113 +330,30 @@ export class CustomComponent {
     this.gridApi.autoSizeColumns(columnIds, false);
   }
 
-  clearFilters() {
-    this.gridApi.setFilterModel(null);
-    this.gridApi.resetColumnState();
-    document.getElementsByTagName('select')[0].selectedIndex = 0;
-  }
-
-  filteredList: any[] = [];
-
-  onSearchColumn(event: Event) {
-    const searchCol = (event.target as HTMLInputElement).value;
-
-    const cols = this.gridApi.getAllGridColumns();
-    this.filteredList = cols.filter((col) =>
-      col.getColId().toLowerCase().includes(searchCol.toLowerCase())
-    );
-  }
-
-  onColumnSelected(event: MatAutocompleteSelectedEvent) {
-    const selectedColumn = event.option.value;
-    console.log('Selected Column:', selectedColumn);
-
-    this.gridApi.ensureColumnVisible(selectedColumn, 'start');
-
-    const column = this.gridApi.getColumnDef(selectedColumn);
-    console.log('Column:', column);
-    if (column) {
-      column.cellClass = 'highlight-column';
-
-      setTimeout(() => {
-        column.cellClass = '';
-        this.gridApi.refreshCells({ force: true });
-      }, 1000);
-      this.gridApi.refreshCells({ force: true });
-    }
-  }
-
-  loadPresets() {
-    this.http.get('http://localhost:8000/presets').subscribe({
-      next: (data: any) => {
-        this.filtersList = data;
+  getContextMenuItems = (params: GetContextMenuItemsParams): (string | MenuItemDef)[] => {
+    const result: (string | MenuItemDef)[] = [
+      {
+        name: "Actions",
+        action: () => {
+          if (params.node) {
+            const rowData = params.node.data;
+            console.log('Row Data:', rowData);
+            const rowNodeData = JSON.stringify(rowData);
+            this.dialog.open(PopulateDataGridComponent, {
+              data: rowData,
+              width: '1000px',
+              height: '600px',
+            });
+          }
+        },
       },
-      error: (err) => {
-        console.error('Error loading presets', err);
-      },
-    });
-  }
-
-  saveFilterModel() {
-    const filterModel = this.gridApi.getFilterModel();
-    const columnState = this.gridApi.getColumnState();
-
-    if (Object.keys(filterModel).length > 0 || columnState.length > 0) {
-      const filterName = prompt('Enter a name for the filter:');
-      if (filterName) {
-        const newPreset = {
-          name: filterName,
-          state: { filterModel, columnState },
-        };
-        this.http.post('http://localhost:8000/presets', newPreset).subscribe({
-          next: () => {
-            this.filtersList.push(newPreset);
-            this.clearFilters();
-          },
-          error: (err) => {
-            console.error('Error saving filter', err);
-          },
-        });
-      }
-    } else {
-      alert('No filters to save.');
-    }
-  }
-
-  applySavedFilter(event: Event) {
-    const name = (event.target as HTMLSelectElement).value;
-
-    const selectedFilter = this.filtersList.find(
-      (filter) => filter.name === name
-    );
-
-    if (selectedFilter) {
-      this.gridApi.setFilterModel(selectedFilter.state.filterModel);
-      this.gridApi.applyColumnState({
-        state: selectedFilter.state.columnState,
-        applyOrder: true,
-      });
-    }
-  }
-
-
-  colDefData = [];
-
-  loadColDefs() {
-    this.http.get('http://localhost:3001/colConfig').subscribe({
-      next: (data: any) => {
-        this.colDefData = data;
-        this.actionsItemsColumnFactory.bindActionHandlers(this.colDefData, this.updateEquity, this.deleteEquity, this);
-        this.createColumnDefs();
-      },
-      error: (err) => {
-        console.error('Error loading column definitions', err);
-      },
-    });
-  }
-
-  createColumnDefs() {
-    this.colDefs = this.columnFactory.createColumns(this.colDefData);
-  }
+      'copy',
+      'paste',
+      'export',
+      'separator',
+      'copyWithHeaders',
+    ];
+    return result;
+  };
   
 }

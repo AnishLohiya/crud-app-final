@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input, Output, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { IEquity } from '../../interfaces/iequity';
 import { EquityService } from '../../services/equity/equity.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -12,9 +12,9 @@ import {
   ValueFormatterParams,
   ValueParserParams,
 } from 'ag-grid-community';
-import { ActionCellRendererComponent } from '../action-cell-renderer/action-cell-renderer.component';
+import { ActionCellRendererComponent, MultiCellRenderer } from '../../shared/renders'
 import { FormModalComponent } from '../../shared/form-modal/form-modal.component';
-import { equityFormFields } from '../../utils/equityFormFields';
+import { equityFormFields } from '../../utils/form-fields/equityFormFields';
 import {
   formatDateToDDMMYYYY,
   formatDateToYYYYMMDD,
@@ -31,11 +31,9 @@ import {
   MatAutocompleteModule,
   MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
-import { MultiCellRenderer } from '../../shared/custom-render/multi-cell.renderer.component';
-import { MatChipSet, MatChipsModule } from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { MultiSelectComponent } from '../../shared/dropdown/multi-select/multi-select.component';
 import { TestComponent } from './test.component';
-import OdataProvider from 'ag-grid-odata';
 
 @Component({
   selector: 'app-equity',
@@ -172,9 +170,14 @@ export class EquityComponent {
       id: 'redFont',
       font: {
         fontName: 'Calibri Light',
-        underline: 'Single',
-        italic: true,
         color: '#BB0000',
+      },
+    },
+    {
+      id: 'greenFont', 
+      font: { 
+        fontName: 'Calibri Light', 
+        color: '#00BB00'
       },
     },
     {

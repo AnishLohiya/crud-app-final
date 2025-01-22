@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
-import { MatTabNavPanel, MatTabsModule } from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { ProductComponent } from './components/product/product.component';
-import { OlympicDataComponent } from './components/olympic-data/olympic-data.component';
-import { EquityComponent } from './components/equity/equity.component';
-import { NgForOf } from '@angular/common';
-import { TaskGroupComponent } from './shared/task-group/task-group.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, MatTabsModule, ProductComponent, OlympicDataComponent, EquityComponent, NgForOf, MatTabsModule, MatTabNavPanel, TaskGroupComponent],
+  imports: [RouterOutlet, RouterLink, MatTabsModule,  MatTabsModule, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
